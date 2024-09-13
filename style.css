@@ -236,13 +236,14 @@ body {
 .who-we-are {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     padding: 40px 20px;
     background-color: #f8f9fa;
 }
 
 .who-we-are .content {
-    max-width: 50%;
+    flex: 2; /* Adjust content to take more space */
+    max-width: 60%; /* Adjust the width */
 }
 
 .who-we-are h2 {
@@ -267,15 +268,23 @@ body {
 }
 
 .who-we-are .image {
-    max-width: 45%;
-    height: 200px;
-    background-color: #ddd;
+    flex: 1; /* Allow the image container to take less space */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 14px;
-    color: #666;
+    max-width: 40%; /* Restrict max width to ensure alignment */
+    background-color: #ddd;
+    padding: 10px; /* Optional: adds padding around the image */
 }
+
+.who-we-are .image img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover; /* Makes the image cover the container */
+}
+
+
+
 
 .products-section {
     background-color: #e9ecef;
@@ -486,7 +495,6 @@ body {
     width: 30px;
     margin-right: 15px;
 }
-
 
 .contact-form h2 {
     font-size: 26px;
