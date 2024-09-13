@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QareMedic</title>
+    <title>QAREMEDIC SDN BHD</title>
+    <link rel="icon" href="./images/qaremedicc.ico" type="image/x-icon">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
 
@@ -51,9 +52,10 @@
                 performance of medical devices and healthcare products in the supply chains are well maintained.</p>
         </div>
         <div class="image">
-            [Image Placeholder]
+            <img src="./images/qaremedicc.png" alt="Company Image">
         </div>
     </div>
+    
 
     <!--EVENT SECTION-->
     <section class="event-section">
@@ -157,13 +159,14 @@
             <div class="info-section">
                 <i class="fas fa-phone-alt icon"></i>
                 <p>
-                    24/7 Support <br>
-                    <a href="Tel:+60123259353" class="phone-link">+6012-325-9353 (Noli)</a> <br>
-                    <a href="Tel:+60127989353" class="phone-link">+6012-798-9353 (Izham)</a> <br>
-                    <a href="Tel:+60174543477" class="phone-link">+6017-454-3477 (Rabi'atul)</a> <br>
-                    <a href="Tel:+60162549353" class="phone-link">+6016-254-9353 (Ara)</a> <br>
-                    <a href="Tel:+60380667569" class="phone-link">+603-8066-7569 (Office)</a> <br>                  
-                    <a href="Fax:+60380666564" class="phone-link">+603-8066-6564 (Fax)</a>
+                    <strong>24/7 Support</strong> <br>
+                    <a href="tel:+60123259353" class="phone-link">+6012-325-9353 (Noli)</a> <br>
+                    <a href="tel:+60127989353" class="phone-link">+6012-798-9353 (Izham)</a> <br>
+                    <a href="tel:+60174543477" class="phone-link">+6017-454-3477 (Rabi'atul)</a> <br>
+                    <a href="tel:+60162549353" class="phone-link">+6016-254-9353 (Ara)</a> <br><br>
+                    <strong>Office Hours (Mon-Fri, 9 AM - 6 PM)</strong> <br>
+                    <a href="tel:+60380667569" class="phone-link">+603-8066-7569 (Office)</a> <br>
+                    <a href="tel:+60380666564" class="phone-link">+603-8066-6564 (Fax)</a>
                 </p>
             </div>
             <div class="info-section">
@@ -206,53 +209,81 @@
             { src: './images/qaremedicc.png', alt: 'Product 3', caption: 'Product 3', link: '#' },
             { src: './images/sticky mat.png', alt: 'Product 4', caption: 'Product 4', link: '#' },
             { src: './images/wound management.png', alt: 'Product last', caption: 'Product last', link: '#' },
+            { src: './images/sutures.png', alt: 'Product 1', caption: 'Product 1', link: '#' },
+            { src: './images/skin stapler.png', alt: 'Product 2', caption: 'Product 2', link: '#' },
+            { src: './images/bonewax.png', alt: 'Product 3', caption: 'Product 3', link: '#' },
+            { src: './images/primed.png', alt: 'Product 4', caption: 'Product 4', link: '#' },
+            { src: './images/mda.png', alt: 'Product 5', caption: 'Product 5', link: '#' },
+            { src: './images/PMS.png', alt: 'Product 1', caption: 'Product 1', link: '#' },
+            { src: './images/ProActive.png', alt: 'Product 2', caption: 'Product 2', link: '#' },
+            { src: './images/qaremedicc.png', alt: 'Product 3', caption: 'Product 3', link: '#' },
             // Add more images with links as needed
         ];
 
         const slider = document.getElementById('slider');
-        const itemsPerPage = 3;
-        let currentIndex = 0;
+const itemsPerPage = 3;
+let currentIndex = 0;
+let slideInterval;
 
-        function createSliderItems() {
-            images.forEach(image => {
-                const item = document.createElement('div');
-                item.classList.add('slider-item');
-                item.innerHTML = `
+function createSliderItems() {
+    images.forEach(image => {
+        const item = document.createElement('div');
+        item.classList.add('slider-item');
+        item.innerHTML = `
             <a href="${image.link}" target="_blank">
                 <img src="${image.src}" alt="${image.alt}">
             </a>
             <div class="caption">${image.caption}</div>
         `;
-                slider.appendChild(item);
-            });
+        slider.appendChild(item);
+    });
+}
+
+function updateSlider() {
+    const offset = -currentIndex * 100 / itemsPerPage;
+    slider.style.transform = `translateX(${offset}%)`;
+}
+
+function startAutoSlide() {
+    slideInterval = setInterval(() => {
+        if (currentIndex < slider.children.length - itemsPerPage) {
+            currentIndex += itemsPerPage;
+        } else {
+            currentIndex = 0; // Move to the first page
         }
-
-        function updateSlider() {
-            const offset = -currentIndex * 100 / itemsPerPage;
-            slider.style.transform = `translateX(${offset}%)`;
-        }
-
-        document.getElementById('prev').addEventListener('click', () => {
-            if (currentIndex > 0) {
-                currentIndex -= itemsPerPage;
-            } else {
-                currentIndex = slider.children.length - itemsPerPage;
-            }
-            updateSlider();
-        });
-
-        document.getElementById('next').addEventListener('click', () => {
-            if (currentIndex < slider.children.length - itemsPerPage) {
-                currentIndex += itemsPerPage;
-            } else {
-                currentIndex = 0;
-            }
-            updateSlider();
-        });
-
-        // Initialize slider with images
-        createSliderItems();
         updateSlider();
+    }, 3000); // Change slide every 3 seconds
+}
+
+function stopAutoSlide() {
+    clearInterval(slideInterval);
+}
+
+document.getElementById('prev').addEventListener('click', () => {
+    if (currentIndex > 0) {
+        currentIndex -= itemsPerPage;
+    } else {
+        currentIndex = slider.children.length - itemsPerPage;
+    }
+    updateSlider();
+});
+
+document.getElementById('next').addEventListener('click', () => {
+    if (currentIndex < slider.children.length - itemsPerPage) {
+        currentIndex += itemsPerPage;
+    } else {
+        currentIndex = 0;
+    }
+    updateSlider();
+});
+
+slider.addEventListener('mouseover', stopAutoSlide);
+slider.addEventListener('mouseout', startAutoSlide);
+
+// Initialize slider with images and start auto slide
+createSliderItems();
+updateSlider();
+startAutoSlide();
 
         function toggleMenu() {
             const navMenu = document.getElementById('nav-menu');
